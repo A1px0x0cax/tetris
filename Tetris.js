@@ -8,7 +8,7 @@ const rotateBtn = document.querySelector(".rotate_button");
 const leftBtn = document.querySelector(".left_button");
 const downBtn = document.querySelector(".down_button");
 const rightBtn = document.querySelector(".right_button");
-const dropBtn = document.querySelector(".drop_button");
+const dropBtn = document.querySelector(".drop_btton");
 
 //세팅
 const Game_Rows = 20;
@@ -21,7 +21,6 @@ let downInterval;
 let tempMovingItem;
 
 
-
 const movingItem = {
     type: "null",
     direction: 3,
@@ -29,11 +28,76 @@ const movingItem = {
     left: 3
 };
 
+console.log('Created by Denis')
+
+console.log = function () {};
+console.warn = function () {};
+console.error = function () {};
+console.info = function () {};
+
+(function() {
+    let devToolsOpened = false;
+    let alertShown = false;
+    let strikeCount = 0;
+
+    const detectDevTools = () => {
+        const threshold = 160;
+        const widthExceeded = window.outerWidth - window.innerWidth > threshold;
+        const heightExceeded = window.outerHeight - window.innerHeight > threshold;
+
+        if (widthExceeded || heightExceeded) {
+            if (!devToolsOpened) {
+                devToolsOpened = true;
+                strikeCount++;
+
+                stopGame(); // 게임 중단
+
+                if (strikeCount === 1) {
+                    if (!alertShown) {
+                        alertShown = true;
+                        alert("개발자 도구가 감지되었습니다. 게임이 중단됩니다");
+                        alert("다시 열면 가만 안둡니다.");
+                    }
+                } else if (strikeCount >= 2) {
+                    alert("진짜 왜 그러는거지");
+                    window.location.href = "about:blank";
+                }
+            }
+        } else {
+            devToolsOpened = false;
+        }
+    };
+
+    setInterval(detectDevTools, 1000);
+})();
+
+(function() {
+    let triggered = false;
+
+    const trap = {
+        toString: function () {
+            if (!triggered) {
+                triggered = true;
+                alert("진짜 하지마세요");
+                window.location.href = "about:blank";
+            }
+            return "👀";
+        }
+    };
+
+    // 콘솔에 노출시킬 트랩
+    setInterval(() => {
+        // 사용자 콘솔에서 이 객체를 평가하는 순간 toString이 실행됨
+        console.log(trap);
+    }, 5000); // 5초마다 다시 출력
+
+})();
+
 init()
 //Functions
 function init() {
     score = 0;
-    updateScoreDisplay();
+    updateScoreDisplay(); // 점수판에 0 표시
     tempMovingItem = { ...movingItem };
     for (let i = 0; i < Game_Rows; i++) {
         prependLine();
@@ -110,15 +174,19 @@ function checkMatch() {
         }
     });
 
+    // 줄 개수에 따라 점수 계산
     if (linesCleared === 1) score += 1;
     else if (linesCleared === 2) score += 3;
     else if (linesCleared === 3) score += 10;
     else if (linesCleared >= 4) score += 30;
 
+    // 최고 점수 갱신
     if (score > highScore) {
         highScore = score;
         localStorage.setItem("tetrisHighScore", highScore);
     }
+
+    // 점수 표시 업데이트
     updateScoreDisplay();
 
     generateNewBlock();
@@ -166,6 +234,10 @@ function showGameoverText() {
 }
 function updateScoreDisplay() {
     scoreDisplay.innerText = `Score: ${score} / High: ${highScore}`;
+}
+function stopGame() {
+    clearInterval(downInterval);
+    showGameoverText();
 }
 //event control
 document.addEventListener("keydown", e => {
