@@ -5,6 +5,7 @@
 .ilu {
     display: flex;
     color: bisque;
+    left: center;
     }
 ul {
     list-style: none;
