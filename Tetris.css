@@ -209,6 +209,6 @@ body {
     }
     .ilu {
         display: flex;
-        opacity: 0%;
+        opacity: 0.01%;
     }
 }
