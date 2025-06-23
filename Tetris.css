@@ -2,11 +2,6 @@
     margin: 0;
     padding: 0;
 }
-.ilu {
-    display: flex;
-    color: bisque;
-    left: center;
-    }
 ul {
     list-style: none;
 }
@@ -146,6 +141,11 @@ body {
     top: 0px;
     left: -45px;
 }
+.ilu {
+    display: flex;
+    color: bisque;
+    left: center;
+    }
 @media (max-width: 768px) {
     .ilu {
         display: flex;
@@ -213,3 +213,8 @@ body {
         margin-top: 0.5rem;
     }
 }
+.ilu {
+        display: flex;
+        color: bisque;
+        text-align: center;
+    }
