@@ -142,7 +142,7 @@ body {
     top: 0px;
     left: -45px;
 }
-@media (max-width: 0px) {
+@media (max-width: 479px) {
     body {
         overflow: auto;
     }
