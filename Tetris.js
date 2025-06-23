@@ -8,7 +8,7 @@ const rotateBtn = document.querySelector(".rotate_button");
 const leftBtn = document.querySelector(".left_button");
 const downBtn = document.querySelector(".down_button");
 const rightBtn = document.querySelector(".right_button");
-const dropBtn = document.querySelector(".drop_btton");
+const dropBtn = document.querySelector(".drop_button");
 
 //세팅
 const Game_Rows = 20;
