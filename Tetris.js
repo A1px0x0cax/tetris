@@ -4,11 +4,18 @@ const tool = document.querySelector('.tool > ul');
 const gameText = document.querySelector(".game-text");
 const restartButton = document.querySelector(".game-text > button");
 const scoreDisplay = document.querySelector(".score");
+const rotateBtn = document.querySelector(".rotate_button");
+const leftBtn = document.querySelector(".left_button");
+const downBtn = document.querySelector(".down_button");
+const rightBtn = document.querySelector(".right_button");
+const dropBtn = document.querySelector(".drop_btton");
+
 //세팅
 const Game_Rows = 20;
 const Game_Cols = 10;
 
 let score = 0;
+let highScore = parseInt(localStorage.getItem("tetrisHighScore")) || 0;
 let duration = 500;
 let downInterval;
 let tempMovingItem;
@@ -25,11 +32,13 @@ const movingItem = {
 init()
 //Functions
 function init() {
-        tempMovingItem = { ...movingItem };
-        for (let i = 0; i < Game_Rows; i++) {
-        prependLine()
+    score = 0;
+    updateScoreDisplay();
+    tempMovingItem = { ...movingItem };
+    for (let i = 0; i < Game_Rows; i++) {
+        prependLine();
     }
-    generateNewBlock()
+    generateNewBlock();
 }
 
 function prependLine() {
@@ -83,26 +92,38 @@ function seizeBlock() {
     })
     checkMatch()
 }
-function checkMatch(){
-
+function checkMatch() {
     const childNodes = tool.childNodes;
-    childNodes.forEach(child=>{
+    let linesCleared = 0;
+
+    childNodes.forEach(child => {
         let matched = true;
-        child.childNodes[0].childNodes.forEach(li=>{
-            if(!li.classList.contains("seized")){
+        child.childNodes[0].childNodes.forEach(li => {
+            if (!li.classList.contains("seized")) {
                 matched = false;
             }
-        })
-        if(matched){
+        });
+        if (matched) {
             child.remove();
-            prependLine()
-            score++;
-            scoreDisplay.innerText = score;
+            prependLine();
+            linesCleared++;
         }
-    })
+    });
 
-    generateNewBlock()
+    if (linesCleared === 1) score += 1;
+    else if (linesCleared === 2) score += 3;
+    else if (linesCleared === 3) score += 10;
+    else if (linesCleared >= 4) score += 30;
+
+    if (score > highScore) {
+        highScore = score;
+        localStorage.setItem("tetrisHighScore", highScore);
+    }
+    updateScoreDisplay();
+
+    generateNewBlock();
 }
+
 function generateNewBlock(){
 
     clearInterval(downInterval);
@@ -143,6 +164,9 @@ function drop() {
 function showGameoverText() {
     gameText.style.display = "flex"
 }
+function updateScoreDisplay() {
+    scoreDisplay.innerText = `Score: ${score} / High: ${highScore}`;
+}
 //event control
 document.addEventListener("keydown", e => {
     switch(e.keyCode){
@@ -167,8 +191,25 @@ document.addEventListener("keydown", e => {
     }
 })
 
+
 restartButton.addEventListener("click", () => {
     tool.innerHTML = "";
     gameText.style.display = "none"
     init()
 })
+
+rotateBtn.addEventListener("click", () => {
+    changeDirection();
+});
+leftBtn.addEventListener("click", () => {
+    BlockMovement("left", -1);
+});
+rightBtn.addEventListener("click", () => {
+    BlockMovement("left", 1);
+});
+downBtn.addEventListener("click", () => {
+    BlockMovement("top", 1);
+});
+dropBtn.addEventListener("click", () => {
+    drop();
+});
