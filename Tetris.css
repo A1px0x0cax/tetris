@@ -106,3 +106,39 @@ body {
 .L_right {
     background: purple;
 }
+.controller {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    left: 70rem;
+    top: 40rem;
+    gap: 1rem;
+    margin-left: 1rem;
+}
+
+.motion_buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+/* 버튼 공통 스타일 */
+.controller button {
+    font-size: 2rem;
+    padding: 1rem;
+    border: none;
+    border-radius: 1rem;
+    background: #eee;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.controller button:hover {
+    background: #ccc;
+}
+.drop_button {
+    position: absolute;
+    top: 0px;
+    left: -45px;
+}
