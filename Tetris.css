@@ -142,44 +142,66 @@ body {
     top: 0px;
     left: -45px;
 }
-@media (max-width: 479px) {
+@media (max-width: 768px) {
     body {
-        overflow: auto;
+        overflow-y: auto;
     }
-    .tool > ul {
-        border: 2px solid #000;
-        width: 250px;
-        margin: 0 auto;
+
+    .title {
+        font-size: 48px;
+        letter-spacing: -4px;
+        margin-top: 1rem;
     }
-    .tool > ul > li {
-        width: 100%;
-        height: 25px;
+
+    .score {
+        font-size: 24px;
+        margin: 1rem 0;
     }
-    .tool > ul > li > ul {
-        display: flex;
-    }
-    .tool > ul > li > ul >li {
-        width: 25px;
-        height: 25px;
-        outline: 1px solid #ccc;
-    }
+
     .game-container {
+        display: flex;
         flex-direction: column;
         align-items: center;
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+
+    .tool > ul {
+        width: 250px;
+        border: 2px solid #000;
+    }
+
+    .tool > ul > li {
+        height: 25px;
+    }
+
+    .tool > ul > li > ul > li {
+        width: 25px;
+        height: 25px;
     }
 
     .controller {
-        position: absolute;
-        left: center;
+        position: static;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 2rem;
     }
 
     .motion_buttons {
+        display: flex;
         justify-content: center;
+        gap: 1rem;
+    }
+
+    .controller button {
+        font-size: 1.5rem;
+        padding: 0.7rem 1rem;
     }
 
     .drop_button {
         position: static;
         margin-top: 0.5rem;
     }
-
 }
