@@ -2,7 +2,10 @@
     margin: 0;
     padding: 0;
 }
-
+.ilu {
+    display: flex;
+    color: bisque;
+    }
 ul {
     list-style: none;
 }
@@ -142,11 +145,11 @@ body {
     top: 0px;
     left: -45px;
 }
-.ilu {
-    display: flex;
-    color: bisque;
-    }
 @media (max-width: 768px) {
+    .ilu {
+        display: flex;
+        color: bisque;
+    }
     body {
         overflow-y: auto;
     }
@@ -207,9 +210,5 @@ body {
     .drop_button {
         position: static;
         margin-top: 0.5rem;
-    }
-    .ilu {
-        display: flex;
-        color: bisque;
     }
 }
