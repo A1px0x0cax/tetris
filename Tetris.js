@@ -176,9 +176,9 @@ function checkMatch() {
 
     // 줄 개수에 따라 점수 계산
     if (linesCleared === 1) score += 1;
-    else if (linesCleared === 2) score += 3;
-    else if (linesCleared === 3) score += 10;
-    else if (linesCleared >= 4) score += 30;
+    else if (linesCleared === 2) score += 33;
+    else if (linesCleared === 3) score += 200;
+    else if (linesCleared >= 4) score += 500;
 
     // 최고 점수 갱신
     if (score > highScore) {
